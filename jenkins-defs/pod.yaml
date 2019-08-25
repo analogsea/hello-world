@@ -1,0 +1,47 @@
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+
+  volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
+  - name: code
+    persistentVolumeClaim:
+      claimName: ballerina-shared-code
+      storageClassName: csi-cephfs
+      mountPath: "/etc/ballerina"
+      accessModes:
+        - ReadWriteMany
+      readOnly: false
+
+
+
+  containers:
+
+  - name: jnlp
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: jnlp
+
+  - name: docker
+    image: docker:19.03-rc-git
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - name: dockersock
+      mountPath: /var/run/docker.sock
+    env:
+      - name: BUILD_MEME_NUM
+        value: test
+
+
+  - name: ballerina
+    image: 1.0.0-alpha
+    command:
+    - cat
+    tty: true
+    # volumeMounts:
+    # - name: code
