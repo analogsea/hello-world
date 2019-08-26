@@ -7,14 +7,14 @@ spec:
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
-  - name: code
-    persistentVolumeClaim:
-      claimName: ballerina-shared-code
-      storageClassName: csi-cephfs
-      mountPath: "/etc/ballerina"
-      accessModes:
-        - ReadWriteMany
-      readOnly: false
+  # - name: code
+  #   persistentVolumeClaim:
+  #     claimName: ballerina-shared-code
+  #     storageClassName: csi-cephfs
+  #     mountPath: "/etc/ballerina"
+  #     accessModes:
+  #       - ReadWriteMany
+  #     readOnly: false
 
 
 
@@ -33,15 +33,15 @@ spec:
     volumeMounts:
     - name: dockersock
       mountPath: /var/run/docker.sock
-    env:
-      - name: BUILD_MEME_NUM
-        value: test
+    # env:
+    #   - name: BUILD_MEME_NUM
+    #     value: test
 
 
-  - name: ballerina
-    image: 1.0.0-alpha
-    command:
-    - cat
-    tty: true
-    # volumeMounts:
-    # - name: code
+  # - name: ballerina
+  #   image: 1.0.0-alpha
+  #   command:
+  #   - cat
+  #   tty: true
+  #   volumeMounts:
+  #   - name: code

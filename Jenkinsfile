@@ -28,10 +28,13 @@ pipeline {
         container('docker') {
           // git clone 'https://github.com/analogsea/hello-world.git'
           // sh 'docker build . -t '
-          sh 'env'
-          sh "git clone 'https://github.com/analogsea/hello-world.git' /etc/ballerina"
-          sh "ls /etc/ballerina"
+          sh 'ls'
+          sh 'docker ps'
+          sh 'echo $BUILD_NUMBER'
+          // sh "git clone 'https://github.com/analogsea/hello-world.git' /etc/ballerina"
+          // sh "ls /etc/ballerina"
         }
+
       }
     }
     // stage('Push') {
